@@ -1,27 +1,47 @@
-# I18nDemo
+# Angular i18n Demo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.0.
+A minimal Angular application demonstrating a hand-rolled internationalization (i18n) approach: a translation service and pipe that load language strings from JSON files at runtime, without a third-party i18n library.
 
-## Development server
+## What's inside
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- `TranslateService` — fetches a language JSON file (`assets/i18n/<lang>.json`) via `HttpClient` and stores the resulting key/value map.
+- `TranslatePipe` — an impure Angular pipe (`| translate`) that looks up a key in the loaded translation map, falling back to the raw key if not found.
+- `AppComponent` — renders a title translated via the pipe and two buttons to switch between English and Japanese at runtime.
+- Sample translation files for English (`en.json`) and Japanese (`jp.json`) under `src/assets/i18n/`.
 
-## Code scaffolding
+## Tech stack
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Angular (standalone CLI project, TypeScript)
+- RxJS
+- Karma / Jasmine for unit tests
+- Protractor for end-to-end tests
 
-## Build
+## Quickstart
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```bash
+yarn install
+yarn start
+```
 
-## Running unit tests
+Navigate to `http://localhost:4200/`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Other scripts:
 
-## Running end-to-end tests
+```bash
+yarn build   # production build to dist/
+yarn test    # unit tests via Karma
+yarn e2e     # end-to-end tests via Protractor
+yarn lint    # lint via ng lint
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Project structure
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+src/app/
+  translate.service.ts   # loads and stores translation data
+  translate.pipe.ts       # pipe used in templates to resolve a key
+  app.component.ts/.html  # demo UI with language switch buttons
+src/assets/i18n/
+  en.json                 # English strings
+  jp.json                 # Japanese strings
+```
